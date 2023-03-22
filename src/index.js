@@ -24,14 +24,19 @@ const initializeBrowser = (() => {
   `
   content.appendChild(main);
 
-  const swapTab = (tab) => {
-    main.innerHTML = tabs[tab];
+  const swapTab = (button) => {
+    main.innerHTML = tabs[button.value];
+    button.setAttribute('disabled', 'true');
   };
 
   const buttons = [...header.querySelectorAll('button')];
   buttons.forEach(element => {
     element.addEventListener('click', function(){
-      swapTab(element.value)
+      buttons.forEach(element => {
+        element.disabled = false;
+      });
+      element.disabled = true;
+      swapTab(element)
     });
   });
 
