@@ -6,17 +6,17 @@ const tabs = {Home, Menu, Booking};
 const content = document.getElementById('content');
 
 const initializeBrowser = (() => {
-  const header = document.createElement('header');
-  header.innerHTML = 
+  const nav = document.createElement('nav');
+  nav.innerHTML = 
   /*html*/`
     <ul class="tabs">
-      <li class="tab"><button value = "Home">Home</button></li>
-      <li class="tab"><button value = "Menu">Menu</button></li>
-      <li class="tab"><button value = "Booking">Booking</button></li>
+      <li><button value = "Home">Home</button></li>
+      <li><button value = "Menu">Menu</button></li>
+      <li><button value = "Booking">Booking</button></li>
     </ul>
   `
 
-  content.appendChild(header);
+  content.appendChild(nav);
   const main = document.createElement('main');
   main.innerHTML =
   /*html*/`
@@ -25,11 +25,12 @@ const initializeBrowser = (() => {
   content.appendChild(main);
 
   const swapTab = (button) => {
-    main.innerHTML = tabs[button.value];
+    main.removeChild(main.lastChild);
+		main.appendChild(tabs[button.value]);
     button.setAttribute('disabled', 'true');
   };
 
-  const buttons = [...header.querySelectorAll('button')];
+  const buttons = [...nav.querySelectorAll('button')];
   buttons.forEach(element => {
     element.addEventListener('click', function(){
       buttons.forEach(element => {
